@@ -25,7 +25,7 @@ static int pause;
 //-------------------------------------------------------------------
 static void gui_read_draw_batt() {
     sprintf(buffer, "Batt:%3d%%", get_batt_perc());
-    draw_txt_string(screen_width/FONT_WIDTH-2-1-1-9, 0, buffer, MAKE_COLOR(COLOR_BLACK, COLOR_WHITE));
+    draw_txt_string(screen_width/FONT_WIDTH-2-1-1-9, 0, buffer, MAKE_COLOR(COLOR_BLACK, conf.reader_color));
 }
 
 //-------------------------------------------------------------------
@@ -36,12 +36,12 @@ static void gui_read_draw_clock() {
     t = time(NULL);
     ttm = localtime(&t);
     sprintf(buffer, "%2u:%02u", ttm->tm_hour, ttm->tm_min);
-    draw_txt_string(screen_width/FONT_WIDTH-2-1-1-9-2-5, 0, buffer, MAKE_COLOR(COLOR_BLACK, COLOR_WHITE));
+    draw_txt_string(screen_width/FONT_WIDTH-2-1-1-9-2-5, 0, buffer, MAKE_COLOR(COLOR_BLACK, conf.reader_color));
 }
 
 //-------------------------------------------------------------------
 static void gui_read_draw_scroll_indicator() {
-    draw_txt_char(screen_width/FONT_WIDTH-2, 0, (conf.reader_autoscroll)?((pause)?'\x05':'\x04'):'\x03', MAKE_COLOR(COLOR_BLACK, COLOR_WHITE)); //title infoline
+    draw_txt_char(screen_width/FONT_WIDTH-2, 0, (conf.reader_autoscroll)?((pause)?'\x05':'\x04'):'\x03', MAKE_COLOR(COLOR_BLACK, conf.reader_color)); //title infoline
 }
 
 //-------------------------------------------------------------------
@@ -166,7 +166,7 @@ void gui_read_draw() {
     
         sprintf(buffer, "(%3d%%) %d/%d  ", (read_file_size)?(conf.reader_pos*100/read_file_size):0, conf.reader_pos, read_file_size);
         buffer[screen_width/FONT_WIDTH]=0;
-        draw_txt_string(0, 0, buffer, MAKE_COLOR(COLOR_BLACK, COLOR_WHITE)); //title infoline
+        draw_txt_string(0, 0, buffer, MAKE_COLOR(COLOR_BLACK, conf.reader_color)); //title infoline
 
         // scrollbar
         if (read_file_size) {
@@ -176,7 +176,7 @@ void gui_read_draw() {
             i=(i-n)*conf.reader_pos/read_file_size;   // top pos
             draw_filled_rect(x+w+6+2, y+1,   x+w+6+6, y+1+i,   MAKE_COLOR(COLOR_BLACK, COLOR_BLACK));
             draw_filled_rect(x+w+6+2, y+i+n, x+w+6+6, y+h-1-1, MAKE_COLOR(COLOR_BLACK, COLOR_BLACK));
-            draw_filled_rect(x+w+6+2, y+1+i, x+w+6+6, y+i+n,   MAKE_COLOR(COLOR_WHITE, COLOR_WHITE));
+            draw_filled_rect(x+w+6+2, y+1+i, x+w+6+6, y+i+n,   MAKE_COLOR(conf.reader_color, conf.reader_color));
         } else {
             draw_filled_rect((x+w)*FONT_WIDTH+2, y*FONT_HEIGHT+1, 
                              (x+w)*FONT_WIDTH+6, (y+h)*FONT_HEIGHT-1-1, MAKE_COLOR(COLOR_BLACK, COLOR_BLACK));
