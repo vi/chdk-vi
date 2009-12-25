@@ -1017,7 +1017,6 @@ void gui_fselect_kbd_process() {
                      (selected->name[0] == 'D' && selected->name[1] == 'C' && selected->name[2] == 'I' && selected->name[3] == 'M') ||//If item is DCIM folder
                      (selected->name[3] == 'C'))//If item is a DCIM sub folder
                     i |= MPOPUP_PURGE;//Display PURGE RAW function in popup menu
-                if(selected->size == hook_raw_size())
                     i |= MPOPUP_RAW_DEVELOP;
 #if DNG_SUPPORT
                 if((fselect_marked_count()>1)||(selected->size > hook_raw_size()))
