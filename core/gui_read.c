@@ -195,24 +195,40 @@ void gui_read_kbd_process() {
         case JOGDIAL_LEFT:
         case KEY_ZOOM_OUT:
         case KEY_UP:
-        case KEY_LEFT:
             if (conf.reader_pos>0) {
                 conf.reader_pos -= 45*15;
                 if (conf.reader_pos<0) conf.reader_pos=0;
                 read_to_draw = 1;
             }
             break;
+        case KEY_LEFT:
+            if (conf.reader_pos>0) {
+                conf.reader_pos -= 5*15;
+                if (conf.reader_pos<0) conf.reader_pos=0;
+                read_to_draw = 1;
+            }
+            break;
         case JOGDIAL_RIGHT:
         case KEY_ZOOM_IN:
-        case KEY_DOWN:
-        case KEY_RIGHT:
         case KEY_SHOOT_HALF:
+        case KEY_DOWN:
             if ((conf.reader_pos+read_on_screen)<read_file_size) {
                 conf.reader_pos += read_on_screen;
                 read_to_draw = 1;
             }
             break;
+        case KEY_RIGHT:
+            if ((conf.reader_pos+read_on_screen/2)<read_file_size) {
+                conf.reader_pos += read_on_screen/2;
+                read_to_draw = 1;
+            }
+            break;
         case KEY_SET:
+            if ((conf.reader_pos+1000*15)<read_file_size) {
+                conf.reader_pos += 1000*15;
+                read_to_draw = 1;
+            }
+            break;
             break;
         case KEY_DISPLAY:
             pause = !pause;
