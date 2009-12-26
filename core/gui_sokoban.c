@@ -350,6 +350,7 @@ void gui_sokoban_kbd_process() {
                 sokoban_next_level();
             }
             break;
+	case KEY_SHOOT_HALF:
         case KEY_ZOOM_OUT:
             sokoban_undo();
             need_redraw = 1;
