@@ -57,6 +57,7 @@ int script_params_has_changed=0;
 //Alt mode
  #define SHORTCUT_TOGGLE_RAW          KEY_DISPLAY
  #define SHORTCUT_MF_TOGGLE           KEY_UP
+ #define SHORTCUT_MF_SETTOREAL        KEY_DOWN
 //Half press shoot button   
  #define SHORTCUT_TOGGLE_HISTO        KEY_DOWN
  #define SHORTCUT_TOGGLE_ZEBRA        KEY_MENU
@@ -2364,7 +2365,17 @@ void gui_kbd_process()
 				     conf.subj_dist_override_koef=0;
 			      else ++conf.subj_dist_override_koef;
 			      draw_restore();
-			     }
+		        } else if (kbd_is_key_clicked(SHORTCUT_MF_SETTOREAL)) {
+			    conf.subj_dist_override_value = shooting_get_canon_subject_distance();
+			    if (conf.subj_dist_override_value<200) {
+				conf.subj_dist_override_koef=1;
+			    } else if (conf.subj_dist_override_value<2000) {
+				conf.subj_dist_override_koef=2;
+			    } else {
+				conf.subj_dist_override_koef=3;
+			    }
+			    draw_restore();			    
+			}
                 else if (shooting_get_common_focus_mode())
 #elif CAM_CAN_SD_OVERRIDE
                if (shooting_get_common_focus_mode())
