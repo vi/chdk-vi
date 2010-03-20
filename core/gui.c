@@ -2360,9 +2360,9 @@ void gui_kbd_process()
             } else {
 #if !CAM_HAS_MANUAL_FOCUS && CAM_CAN_SD_OVERRIDE
 	          	if (kbd_is_key_clicked(SHORTCUT_MF_TOGGLE)) {
-			      if (conf.subj_dist_override_koef>0)
+			      if (conf.subj_dist_override_koef>3)
 				     conf.subj_dist_override_koef=0;
-			      else conf.subj_dist_override_koef=1;
+			      else ++conf.subj_dist_override_koef;
 			      draw_restore();
 			     }
                 else if (shooting_get_common_focus_mode())
