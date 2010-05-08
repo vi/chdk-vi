@@ -28,7 +28,7 @@ static void gui_read_draw_batt() {
 
     v = get_batt_average();
     sprintf(buffer, "%ld.%03ld V", v/1000, v%1000);
-    draw_txt_string(screen_width/FONT_WIDTH-2-1-1-9, 0, buffer, MAKE_COLOR(COLOR_BLACK, (v<2100)?COLOR_RED:conf.reader_color));
+    draw_txt_string(screen_width/FONT_WIDTH-2-1-1-9, 0, buffer, MAKE_COLOR(conf.reader_color>>8, (v<2100)?COLOR_RED:conf.reader_color));
 }
 
 //-------------------------------------------------------------------
@@ -39,12 +39,12 @@ static void gui_read_draw_clock() {
     t = time(NULL);
     ttm = localtime(&t);
     sprintf(buffer, "%2u:%02u", ttm->tm_hour, ttm->tm_min);
-    draw_txt_string(screen_width/FONT_WIDTH-2-1-1-9-2-5, 0, buffer, MAKE_COLOR(COLOR_BLACK, conf.reader_color));
+    draw_txt_string(screen_width/FONT_WIDTH-2-1-1-9-2-5, 0, buffer, MAKE_COLOR(conf.reader_color>>8, conf.reader_color));
 }
 
 //-------------------------------------------------------------------
 static void gui_read_draw_scroll_indicator() {
-    draw_txt_char(screen_width/FONT_WIDTH-2, 0, (conf.reader_autoscroll)?((pause)?'\x05':'\x04'):'\x03', MAKE_COLOR(COLOR_BLACK, conf.reader_color)); //title infoline
+    draw_txt_char(screen_width/FONT_WIDTH-2, 0, (conf.reader_autoscroll)?((pause)?'\x05':'\x04'):'\x03',conf.reader_color); //title infoline
 }
 
 int reader_needs_full_redraw=0;
@@ -89,7 +89,7 @@ void gui_read_draw() {
 	h=screen_height-y;
 	last_time = get_tick_count();
 	
-	draw_filled_rect(0, 0, screen_width-1, y-1, MAKE_COLOR(COLOR_BLACK, COLOR_BLACK));
+	draw_filled_rect(0, 0, screen_width-1, y-1, MAKE_COLOR(conf.reader_color>>8, conf.reader_color>>8));
 	draw_filled_rect(0, y, screen_width-1, screen_height-1, MAKE_COLOR((conf.reader_color>>8)&0xFF, (conf.reader_color>>8)&0xFF));
 
 	gui_read_draw_scroll_indicator();
@@ -174,7 +174,7 @@ void gui_read_draw() {
     
         sprintf(buffer, "(%3d%%) %d/%d  ", (read_file_size)?(conf.reader_pos*100/read_file_size):0, conf.reader_pos, read_file_size);
         buffer[screen_width/FONT_WIDTH]=0;
-        draw_txt_string(0, 0, buffer, MAKE_COLOR(COLOR_BLACK, conf.reader_color)); //title infoline
+        draw_txt_string(0, 0, buffer, conf.reader_color); //title infoline
 
         // scrollbar
         if (read_file_size) {
@@ -182,12 +182,12 @@ void gui_read_draw() {
             n=i*read_on_screen/read_file_size;           // bar height
             if (n<20) n=20;
             i=(i-n)*conf.reader_pos/read_file_size;   // top pos
-            draw_filled_rect(x+w+6+2, y+1,   x+w+6+6, y+1+i,   MAKE_COLOR(COLOR_BLACK, COLOR_BLACK));
-            draw_filled_rect(x+w+6+2, y+i+n, x+w+6+6, y+h-1-1, MAKE_COLOR(COLOR_BLACK, COLOR_BLACK));
+            draw_filled_rect(x+w+6+2, y+1,   x+w+6+6, y+1+i,   MAKE_COLOR(conf.reader_color>>8, conf.reader_color>>8));
+            draw_filled_rect(x+w+6+2, y+i+n, x+w+6+6, y+h-1-1, MAKE_COLOR(conf.reader_color>>8, conf.reader_color>>8));
             draw_filled_rect(x+w+6+2, y+1+i, x+w+6+6, y+i+n,   MAKE_COLOR(conf.reader_color, conf.reader_color));
         } else {
             draw_filled_rect((x+w)*FONT_WIDTH+2, y*FONT_HEIGHT+1, 
-                             (x+w)*FONT_WIDTH+6, (y+h)*FONT_HEIGHT-1-1, MAKE_COLOR(COLOR_BLACK, COLOR_BLACK));
+                             (x+w)*FONT_WIDTH+6, (y+h)*FONT_HEIGHT-1-1, MAKE_COLOR(conf.reader_color>>8, conf.reader_color>>8));
         }
 
         read_to_draw = 0;
