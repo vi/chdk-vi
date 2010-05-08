@@ -931,6 +931,37 @@ static int luaCB_set_backlight( lua_State* L )
   return 0;
 }
 
+static int luaCB_set_af_led( lua_State* L )
+{
+  if(luaL_checknumber(L,1)>0){
+        //A470
+	*(long*)0xc0220080=0x46;
+  } else {
+	*(long*)0xc0220080=0x44;
+  }
+  return 0;
+}
+static int luaCB_set_green_led( lua_State* L )
+{
+  if(luaL_checknumber(L,1)>0){
+        //A470
+	*(long*)0xc022008C=0x46;
+  } else {
+	*(long*)0xc022008C=0x44;
+  }
+  return 0;
+}
+static int luaCB_set_print_led( lua_State* L )
+{
+  if(luaL_checknumber(L,1)>0){
+        //A470
+	*(long*)0xc0220084=0x46;
+  } else {
+	*(long*)0xc0220084=0x44;
+  }
+  return 0;
+}
+
 // get the string or number passed in index and return it as an event id
 static unsigned levent_id_from_lua_arg( lua_State* L, int index)
 {
@@ -1413,6 +1444,9 @@ void register_lua_funcs( lua_State* L )
   FUNC(raw_merge_add_file);
   FUNC(raw_merge_end);
   FUNC(set_backlight);
+  FUNC(set_af_led);
+  FUNC(set_green_led);
+  FUNC(set_print_led);
    FUNC(set_aflock);
 #ifdef OPT_CURVES
    FUNC(set_curve_state);
