@@ -24,8 +24,11 @@ static int pause;
 
 //-------------------------------------------------------------------
 static void gui_read_draw_batt() {
-    sprintf(buffer, "Batt:%3d%%", get_batt_perc());
-    draw_txt_string(screen_width/FONT_WIDTH-2-1-1-9, 0, buffer, MAKE_COLOR(COLOR_BLACK, conf.reader_color));
+    unsigned long v;
+
+    v = get_batt_average();
+    sprintf(buffer, "%ld.%03ld V", v/1000, v%1000);
+    draw_txt_string(screen_width/FONT_WIDTH-2-1-1-9, 0, buffer, MAKE_COLOR(COLOR_BLACK, (v<2100)?COLOR_RED:conf.reader_color));
 }
 
 //-------------------------------------------------------------------

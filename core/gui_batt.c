@@ -11,7 +11,7 @@
 static char osd_buf[32];
 
 //-------------------------------------------------------------------
-static long get_batt_average() {
+long get_batt_average() {
     #define VOLTS_N         100
     static unsigned short   volts[VOLTS_N] = {0};
     static unsigned int     n = 0, rn = 0;
