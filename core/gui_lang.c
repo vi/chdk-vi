@@ -576,6 +576,7 @@ static char* gui_lang_default = \
 "453 \"Force manual flash\"\n"
 "454 \"Quality override\"\n"
 "455 \"Restart Lua on error\"\n"
+"456 \"Backlight modulation\"\n"
 ;
 
 //-------------------------------------------------------------------

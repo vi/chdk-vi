@@ -575,12 +575,26 @@ static int remoteHalfShutter=0, remoteFullShutter=0, remoteShooting=0, remoteCli
 #define REMOTE_MAX_CLICK_LENGTH	50
 /*-------------------- Alex scriptless remote additions end ---------------------*/
 
+static int backlight_cycles;
 /* 
     main kb processing
     this monster needs to be broken up and documented, remote stuff should go in it's own functions
 */
 long kbd_process()
 {
+    if (conf.backlight_modulation) {
+	if(backlight_cycles*backlight_cycles*backlight_cycles>>(conf.backlight_modulation+2)) {
+	    TurnOnBackLight();
+	    TurnOffBackLight();
+	    backlight_cycles=1;
+	}
+	backlight_cycles+=1;
+    } else {
+	if(backlight_cycles) { /* Need to turn on again backlight when turning off modulation */
+	    TurnOnBackLight();
+	    backlight_cycles=0;
+	}
+    }
 /* Alternative keyboard mode stated/exited by pressing print key.
  * While running Alt. mode shoot key will start a script execution.
  */

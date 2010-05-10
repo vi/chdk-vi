@@ -695,6 +695,7 @@ static CMenuItem visual_submenu_items[] = {
     {0x65,LANG_MENU_VIS_READER_BKG,          MENUITEM_COLOR_BG,  (int*)&conf.reader_color },
     {0x65,LANG_MENU_VIS_OSD_OVERRIDE,         MENUITEM_COLOR_FG,  (int*)&conf.osd_color_override },
     {0x65,LANG_MENU_VIS_OSD_OVERRIDE_BKG,     MENUITEM_COLOR_BG,  (int*)&conf.osd_color_override },
+    {0x65,LANG_MENU_VIS_BACKLIGHT_MODULATION, MENUITEM_INT,  (int*)&conf.backlight_modulation },
     {0x51,LANG_MENU_BACK,                    MENUITEM_UP },
     {0}
 };
@@ -2255,7 +2256,6 @@ static inline int conf_save_new_settings_if_changed() {
     return 0;
 }
 #endif
-
 
 //-------------------------------------------------------------------
 void gui_kbd_process()
