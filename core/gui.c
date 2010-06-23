@@ -2327,11 +2327,17 @@ void gui_kbd_process()
     
     switch (gui_mode) {
         case GUI_MODE_ALT:
-            if ((mode_get()&MODE_MASK) == MODE_PLAY && kbd_is_key_clicked(KEY_DOWN)) {
-		gui_menu_init(&reader_submenu);
-		gui_draw_read_last(0);
-                draw_restore();
-		return;
+            if ((mode_get()&MODE_MASK) == MODE_PLAY) {
+		if(kbd_is_key_clicked(KEY_DOWN)) {
+		    gui_menu_init(&reader_submenu);
+		    gui_draw_read_last(0);
+		    draw_restore();
+		    return;
+		} else
+		if(kbd_is_key_clicked(KEY_UP)) {
+		    conf.backlight_modulation=(conf.backlight_modulation)?0:1;
+		    return;
+		}
 	    }
             if (kbd_is_key_clicked(SHORTCUT_TOGGLE_RAW)) {
                 if (conf.debug_shortcut_action > 0) {
