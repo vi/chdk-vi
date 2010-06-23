@@ -2373,12 +2373,14 @@ void gui_kbd_process()
 			      draw_restore();
 		        } else if (kbd_is_key_clicked(SHORTCUT_MF_SETTOREAL)) {
 			    conf.subj_dist_override_value = shooting_get_canon_subject_distance();
-			    if (conf.subj_dist_override_value<200) {
+			    if (conf.subj_dist_override_value<100) {
 				conf.subj_dist_override_koef=1;
-			    } else if (conf.subj_dist_override_value<2000) {
+			    } else if (conf.subj_dist_override_value<300) {
 				conf.subj_dist_override_koef=2;
-			    } else {
+			    } else if (conf.subj_dist_override_value<1500) {
 				conf.subj_dist_override_koef=3;
+			    } else {
+				conf.subj_dist_override_koef=4;
 			    }
 			    draw_restore();			    
 			}
