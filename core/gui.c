@@ -100,9 +100,9 @@ int script_params_has_changed=0;
 //Alt mode
  #define SHORTCUT_TOGGLE_RAW          KEY_ERASE
 //Half press shoot button    
- #define SHORTCUT_TOGGLE_HISTO        KEY_UP
- #define SHORTCUT_TOGGLE_ZEBRA        KEY_LEFT
- #define SHORTCUT_TOGGLE_OSD          KEY_RIGHT
+// #define SHORTCUT_TOGGLE_HISTO        KEY_UP
+// #define SHORTCUT_TOGGLE_ZEBRA        KEY_LEFT
+ #define SHORTCUT_TOGGLE_OSD          KEY_UP
  #define SHORTCUT_DISABLE_OVERRIDES KEY_DOWN
 //Alt mode & Manual mode  
  #define SHORTCUT_SET_INFINITY        KEY_UP
@@ -2735,23 +2735,21 @@ void gui_draw_osd() {
 #endif
     
     if (kbd_is_key_pressed(KEY_SHOOT_HALF)) {
-        if (kbd_is_key_pressed(SHORTCUT_TOGGLE_ZEBRA)) {
+        if (kbd_is_key_pressed(KEY_LEFT)) {
             if (!pressed) {
-                conf.zebra_draw = !conf.zebra_draw;
-                if (!conf.zebra_draw) {
-					need_restore = 1;
-                }
-                pressed = 1;
+                conf.tv_override_koef=1; 
+		gui_tv_override_value_enum(1, 0);
+		gui_osd_draw_state();  
+		shooting_expo_param_override();
             }
-        } else if (kbd_is_key_pressed(SHORTCUT_TOGGLE_HISTO)) {
+        } else if (kbd_is_key_pressed(KEY_RIGHT)) {
             if (!pressed) {
-                if (++conf.show_histo>SHOW_HALF) conf.show_histo=0;
-                if (!conf.show_histo) {
-					need_restore = 1;
-                }
-                pressed = 1;
+                conf.tv_override_koef=1;
+		gui_tv_override_value_enum(-1, 0);
+		gui_osd_draw_state();
+		shooting_expo_param_override();
             }
-        } else if (kbd_is_key_pressed(SHORTCUT_TOGGLE_OSD)) {
+        } else if (kbd_is_key_pressed(KEY_UP)) {
             if (!pressed) {
                 conf.show_osd = !conf.show_osd;
                 if (!conf.show_osd) {
@@ -2759,12 +2757,9 @@ void gui_draw_osd() {
                 }
                 pressed = 1;
             }
-        } else if (kbd_is_key_pressed(SHORTCUT_DISABLE_OVERRIDES)) {
+        } else if (kbd_is_key_pressed(KEY_DOWN)) {
              if (!pressed) {
-                 if (conf.override_disable < 2) conf.override_disable = !conf.override_disable;
-                 if (!conf.show_osd) {
-					need_restore = 1;
-                 }
+                 conf.save_raw = ! conf.save_raw;
                  pressed = 1;
              }
         } else {
