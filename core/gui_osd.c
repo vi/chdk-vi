@@ -1082,13 +1082,6 @@ void gui_osd_draw_state() {
 
       
     if ((((conf.tv_enum_type) || (conf.tv_override_value)) && (conf.tv_override_koef)  && !(conf.override_disable==1)) || gui_mode==GUI_MODE_OSD){
-    	if(kbd_is_key_pressed(KEY_SHOOT_HALF)) 
-		 { 
-		  t=(int)(shooting_get_shutter_speed_from_tv96(shooting_get_tv96())*100000);	
-          gui_print_osd_state_string_float("TV:", "%d.%05d ", 100000, t);
-         }
-    	else 
-		 {
     	 if (conf.tv_enum_type) 
 		   gui_print_osd_state_string_chr("TV:",shooting_get_tv_override_value()); 
          else  
@@ -1096,7 +1089,6 @@ void gui_osd_draw_state() {
 		  t=(int)(shooting_get_shutter_speed_override_value()*100000);
           gui_print_osd_state_string_float("TV:", "%d.%05d ", 100000, t);
           }
-       }
     }
     if ((conf.av_override_value && !(conf.override_disable==1))|| gui_mode==GUI_MODE_OSD)  
 	   gui_print_osd_state_string_float("AV:", "%d.%02d ", 100, shooting_get_aperture_from_av96(shooting_get_av96_override_value()));
