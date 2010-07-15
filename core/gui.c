@@ -2335,8 +2335,21 @@ void gui_kbd_process()
 		    return;
 		} else
 		if(kbd_is_key_clicked(KEY_UP)) {
-		    conf.backlight_modulation=(conf.backlight_modulation)?0:1;
+		    if (conf.backlight_modulation==1) {
+			conf.backlight_modulation=-3;
+		    } else if(conf.backlight_modulation) {
+			conf.backlight_modulation=0;
+		    } else {
+			conf.backlight_modulation=1;
+		    }
 		    return;
+		} else
+		if(kbd_is_key_clicked(KEY_RIGHT)) { 
+//		     StartEFCharge(NULL);
+//		     while(!IsStrobeChargeCompleted()) msleep(10);
+//		     StopEFCharge();       
+//		     struct { long type; long bright1; long bright2 } q = {1, 1, 1};
+//		     StartInternalPreFlash(&q);
 		}
 	    }
             if (kbd_is_key_clicked(SHORTCUT_TOGGLE_RAW)) {
