@@ -569,6 +569,7 @@
 
 #define GUI_LANG_ITEMS                  455
 #define LANG_MENU_VIS_BACKLIGHT_MODULATION 	456
+#define LANG_MENU_READ_OPEN_LAST_SWAP        457
 
 //-------------------------------------------------------------------
 extern void gui_lang_init();

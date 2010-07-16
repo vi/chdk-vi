@@ -54,6 +54,10 @@ int gui_read_init(const char* file) {
     static struct stat   st;
     read_file = open(file, O_RDONLY, 0777);
     if (strcmp(file, conf.reader_file)!=0) {
+	if(conf.reader_pos) {
+	    conf.reader_pos_2 = conf.reader_pos;
+	    strcpy(conf.reader_file_2, conf.reader_file);
+	}
         conf.reader_pos = 0;
         strcpy(conf.reader_file, file);
     }

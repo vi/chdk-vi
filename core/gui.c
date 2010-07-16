@@ -148,6 +148,7 @@ static void gui_load_script_default(int arg);
 #ifdef OPT_TEXTREADER
 static void gui_draw_read(int arg);
 static void gui_draw_read_last(int arg);
+static void gui_draw_read_last_swap(int arg);
 #endif
 static void gui_draw_load_menu_rbf(int arg);
 static void gui_draw_load_symbol_rbf(int arg);		//AKA
@@ -367,6 +368,7 @@ static CMenu autoiso_submenu = {0x2d,LANG_MENU_AUTOISO_TITLE, NULL, autoiso_subm
 static CMenuItem reader_submenu_items[] = {
     {0x35,LANG_MENU_READ_OPEN_NEW,           MENUITEM_PROC,    (int*)gui_draw_read },
     {0x35,LANG_MENU_READ_OPEN_LAST,          MENUITEM_PROC,    (int*)gui_draw_read_last },
+    {0x35,LANG_MENU_READ_OPEN_LAST_SWAP,          MENUITEM_PROC,    (int*)gui_draw_read_last_swap },
     {0x35,LANG_MENU_READ_SELECT_FONT,        MENUITEM_PROC,    (int*)gui_draw_load_rbf },
     {0x5f,LANG_MENU_READ_CODEPAGE,           MENUITEM_ENUM,    (int*)gui_reader_codepage_enum },
     {0x5c,LANG_MENU_READ_WORD_WRAP,          MENUITEM_BOOL,    &conf.reader_wrap_by_words },
@@ -3222,6 +3224,18 @@ void gui_draw_read_last(int arg) {
     } else {
         gui_draw_read(arg);
     }
+}
+void gui_draw_read_last_swap(int arg) {
+    char str[101];
+    int pos;
+    strcpy(str, conf.reader_file_2);
+    strcpy(conf.reader_file_2, conf.reader_file);
+    strcpy(conf.reader_file, str);
+    pos = conf.reader_pos_2;
+    conf.reader_pos_2 = conf.reader_pos;
+    conf.reader_pos = pos;
+
+    gui_draw_read_last(arg);
 }
 #endif
 

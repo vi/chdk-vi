@@ -278,6 +278,8 @@ typedef struct {
     int flash_manual_override;
     int flash_video_override_power;
     int backlight_modulation;
+    char reader_file_2[100];
+    int  reader_pos_2;
 } Conf;
 
 extern Conf conf;
