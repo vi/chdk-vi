@@ -9,8 +9,8 @@
 
 //-------------------------------------------------------------------
 
-#define SCRIPT_CONSOLE_NUM_LINES    5
-#define SCRIPT_CONSOLE_LINE_LENGTH  25
+#define SCRIPT_CONSOLE_NUM_LINES    12
+#define SCRIPT_CONSOLE_LINE_LENGTH  40
 #define SCRIPT_CONSOLE_X            0
 #define SCRIPT_CONSOLE_Y            (14-SCRIPT_CONSOLE_NUM_LINES)
 
