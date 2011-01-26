@@ -149,6 +149,7 @@ static void gui_load_script_default(int arg);
 static void gui_draw_read(int arg);
 static void gui_draw_read_last(int arg);
 static void gui_draw_read_last_swap(int arg);
+static void gui_draw_read_swap_colors(int arg);
 #endif
 static void gui_draw_load_menu_rbf(int arg);
 static void gui_draw_load_symbol_rbf(int arg);		//AKA
@@ -369,6 +370,7 @@ static CMenuItem reader_submenu_items[] = {
     {0x35,LANG_MENU_READ_OPEN_NEW,           MENUITEM_PROC,    (int*)gui_draw_read },
     {0x35,LANG_MENU_READ_OPEN_LAST,          MENUITEM_PROC,    (int*)gui_draw_read_last },
     {0x35,LANG_MENU_READ_OPEN_LAST_SWAP,          MENUITEM_PROC,    (int*)gui_draw_read_last_swap },
+    {0x35,LANG_MENU_READ_SWAP_COLORS,          MENUITEM_PROC,    (int*)gui_draw_read_swap_colors },
     {0x35,LANG_MENU_READ_SELECT_FONT,        MENUITEM_PROC,    (int*)gui_draw_load_rbf },
     {0x5f,LANG_MENU_READ_CODEPAGE,           MENUITEM_ENUM,    (int*)gui_reader_codepage_enum },
     {0x5c,LANG_MENU_READ_WORD_WRAP,          MENUITEM_BOOL,    &conf.reader_wrap_by_words },
@@ -695,6 +697,8 @@ static CMenuItem visual_submenu_items[] = {
     {0x65,LANG_MENU_VIS_MENU_SYMBOL_BKG,     MENUITEM_COLOR_BG,  (int*)&conf.menu_symbol_color },
     {0x65,LANG_MENU_VIS_READER_TEXT,         MENUITEM_COLOR_FG,  (int*)&conf.reader_color },
     {0x65,LANG_MENU_VIS_READER_BKG,          MENUITEM_COLOR_BG,  (int*)&conf.reader_color },
+    {0x65,LANG_MENU_VIS_READER_TEXT2_FG,     MENUITEM_COLOR_FG,  (int*)&conf.reader_color_2 },
+    {0x65,LANG_MENU_VIS_READER_TEXT2_BG,     MENUITEM_COLOR_BG,  (int*)&conf.reader_color_2 },
     {0x65,LANG_MENU_VIS_OSD_OVERRIDE,         MENUITEM_COLOR_FG,  (int*)&conf.osd_color_override },
     {0x65,LANG_MENU_VIS_OSD_OVERRIDE_BKG,     MENUITEM_COLOR_BG,  (int*)&conf.osd_color_override },
     {0x65,LANG_MENU_VIS_BACKLIGHT_MODULATION, MENUITEM_INT,  (int*)&conf.backlight_modulation },
@@ -3234,6 +3238,15 @@ void gui_draw_read_last_swap(int arg) {
     pos = conf.reader_pos_2;
     conf.reader_pos_2 = conf.reader_pos;
     conf.reader_pos = pos;
+
+    gui_draw_read_last(arg);
+}
+void gui_draw_read_swap_colors(int arg) {
+    color col;
+
+    col = conf.reader_color;
+    conf.reader_color = conf.reader_color_2;
+    conf.reader_color_2 = col;
 
     gui_draw_read_last(arg);
 }

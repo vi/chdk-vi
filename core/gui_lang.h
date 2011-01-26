@@ -569,7 +569,10 @@
 
 #define LANG_MENU_VIS_BACKLIGHT_MODULATION 	456
 #define LANG_MENU_READ_OPEN_LAST_SWAP        457
-#define GUI_LANG_ITEMS                  457
+#define LANG_MENU_VIS_READER_TEXT2_FG   458
+#define LANG_MENU_VIS_READER_TEXT2_BG   459
+#define LANG_MENU_READ_SWAP_COLORS      460
+#define GUI_LANG_ITEMS                  460
 
 //-------------------------------------------------------------------
 extern void gui_lang_init();

@@ -399,6 +399,7 @@ static const ConfInfo conf_info[] = {
 	CONF_INFO(241, conf.backlight_modulation,     CONF_DEF_VALUE, i:0, NULL),
     CONF_INFO(242, conf.reader_file,            CONF_DEF_PTR,   ptr:"A/README.TXT", conf_change_script_file),
     CONF_INFO(243, conf.reader_pos,             CONF_DEF_VALUE, i:0, NULL),
+    CONF_INFO(244, conf.reader_color_2,           CONF_DEF_VALUE, cl:MAKE_COLOR(COLOR_GREY, COLOR_WHITE), NULL),
     };
 #define CONF_NUM (sizeof(conf_info)/sizeof(conf_info[0]))
 

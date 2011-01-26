@@ -280,6 +280,7 @@ typedef struct {
     int backlight_modulation;
     char reader_file_2[100];
     int  reader_pos_2;
+    color reader_color_2;
 } Conf;
 
 extern Conf conf;
